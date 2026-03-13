@@ -23,8 +23,20 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
 
-          const Expanded(
-            child: Center(child: Text("Products will be shown here")),
+          Expanded(
+            child: GridView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: 0.75,
+              ),
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return ProductCard(title: "Product $index");
+              },
+            ),
           ),
         ],
       ),
