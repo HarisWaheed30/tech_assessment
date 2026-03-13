@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MainApp());
-}
+class CustomTextField extends StatelessWidget {
+  final String hint;
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  const CustomTextField({super.key, required this.hint});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+    return TextField(
+      decoration: InputDecoration(
+        hintText: hint,
+        filled: true,
+        fillColor: Colors.grey.shade100,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: BorderSide.none,
         ),
       ),
     );
