@@ -1,48 +1,74 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../shared/widgets/custom_textfield.dart';
+import '../../../shared/widgets/primary_button.dart';
+
 class SignInScreen extends StatelessWidget {
-  const SignInScreen({super.key});
+  SignInScreen({super.key});
+
+  final emailController = TextEditingController();
+  final usernameController = TextEditingController();
+  final birthdayController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            const SizedBox(height: 60),
+      backgroundColor: Colors.white,
 
-            const Text(
-              "Create Account",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+
+              children: [
+                const SizedBox(height: 40),
+
+                const Text(
+                  "Create\nAccount",
+                  style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+                ),
+
+                const SizedBox(height: 40),
+
+                CustomTextField(hint: "Email"),
+
+                const SizedBox(height: 16),
+
+                CustomTextField(hint: "Username"),
+
+                const SizedBox(height: 16),
+
+                CustomTextField(hint: "Birthday"),
+
+                const SizedBox(height: 16),
+
+                CustomTextField(hint: "Password"),
+
+                const SizedBox(height: 30),
+
+                PrimaryButton(
+                  text: "Create Account",
+                  onPressed: () {
+                    context.go('/home');
+                  },
+                ),
+
+                const SizedBox(height: 20),
+
+                Center(
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const Text("Already have an account? Login"),
+                  ),
+                ),
+              ],
             ),
-
-            const SizedBox(height: 30),
-
-            const TextField(decoration: InputDecoration(hintText: "Email")),
-
-            const SizedBox(height: 15),
-
-            const TextField(decoration: InputDecoration(hintText: "Username")),
-
-            const SizedBox(height: 15),
-
-            const TextField(decoration: InputDecoration(hintText: "Birthday")),
-
-            const SizedBox(height: 15),
-
-            const TextField(decoration: InputDecoration(hintText: "Password")),
-
-            const SizedBox(height: 30),
-
-            ElevatedButton(
-              onPressed: () {
-                context.go('/home');
-              },
-              child: const Text("Next"),
-            ),
-          ],
+          ),
         ),
       ),
     );
