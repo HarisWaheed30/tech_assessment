@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/product_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -44,12 +45,10 @@ class HomeScreen extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.store), label: "Shop"),
-
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
             label: "Cart",
           ),
-
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
       ),
