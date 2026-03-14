@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import '../widgets/product_card.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../widgets/product_card.dart';
+import '../viewmodel/product_provider.dart';
+
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final productState = ref.watch(productProvider);
+
     return Scaffold(
       appBar: AppBar(title: const Text("Shop")),
 
@@ -25,17 +30,34 @@ class HomeScreen extends StatelessWidget {
           ),
 
           Expanded(
-            child: GridView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-                childAspectRatio: 0.75,
-              ),
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return ProductCard(title: "Product $index");
+            child: productState.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+
+              error: (err, _) => Center(child: Text(err.toString())),
+
+              data: (products) {
+                return GridView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 12,
+                    childAspectRatio: 0.75,
+                  ),
+
+                  itemCount: products.length,
+
+                  itemBuilder: (context, index) {
+                    final product = products[index];
+
+                    return ProductCard(
+                      title: product.title,
+                      image: product.image,
+                      price: product.price,
+                    );
+                  },
+                );
               },
             ),
           ),
@@ -43,7 +65,7 @@ class HomeScreen extends StatelessWidget {
       ),
 
       bottomNavigationBar: BottomNavigationBar(
-        items: const [
+        items: [
           BottomNavigationBarItem(icon: Icon(Icons.store), label: "Shop"),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
