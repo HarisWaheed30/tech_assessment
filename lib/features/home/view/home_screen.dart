@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../widgets/product_card.dart';
 import '../widgets/search_bar.dart';
 import '../viewmodel/product_provider.dart';
+import '../widgets/trending_brands.dart';
+import '../widgets/featured_banner.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -21,6 +23,13 @@ class HomeScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(16),
             child: const SearchBarWidget(),
           ),
+          const TrendingBrands(),
+
+          const SizedBox(height: 16),
+
+          const FeaturedBanner(),
+
+          const SizedBox(height: 16),
 
           Expanded(
             child: productState.when(
