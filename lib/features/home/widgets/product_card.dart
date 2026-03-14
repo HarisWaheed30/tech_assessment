@@ -16,12 +16,26 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 2,
+
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
 
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(child: Image.network(image, fit: BoxFit.cover)),
+          Expanded(
+            child: ClipRRect(
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(14),
+              ),
+
+              child: Image.network(
+                image,
+                fit: BoxFit.cover,
+                width: double.infinity,
+              ),
+            ),
+          ),
 
           Padding(
             padding: const EdgeInsets.all(8),
@@ -29,9 +43,9 @@ class ProductCard extends StatelessWidget {
           ),
 
           Padding(
-            padding: const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.only(left: 8, bottom: 8),
             child: Text(
-              "\$ $price",
+              "\$$price",
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
