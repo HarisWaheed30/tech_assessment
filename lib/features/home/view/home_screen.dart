@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../widgets/product_card.dart';
+import '../widgets/search_bar.dart';
 import '../viewmodel/product_provider.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -18,15 +19,7 @@ class HomeScreen extends ConsumerWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(16),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: "Search products",
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-            ),
+            child: const SearchBarWidget(),
           ),
 
           Expanded(
